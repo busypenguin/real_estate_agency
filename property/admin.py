@@ -3,10 +3,11 @@ from .models import Flat, Complaint, Owner
 
 
 class OwnerNameshipInline(admin.TabularInline):
-    model = Owner.flat.through
+    model = Owner.flats.through
     raw_id_fields = ('owner', 'flat')
 
 
+@admin.register(Flat)
 class FlatAdmin(admin.ModelAdmin):
     search_fields = ('town', 'address', 'owner')
     readonly_fields = ('created_at',)
@@ -19,22 +20,15 @@ class FlatAdmin(admin.ModelAdmin):
     ]
 
 
-admin.site.register(Flat, FlatAdmin)
-
-
+@admin.register(Complaint)
 class ComplaintAdmin(admin.ModelAdmin):
     raw_id_fields = ('user', 'flat')
 
 
-admin.site.register(Complaint, ComplaintAdmin)
-
-
+@admin.register(Owner)
 class OwnerAdmin(admin.ModelAdmin):
-    raw_id_fields = ('flat', )
+    raw_id_fields = ('flats', )
     inlines = [
         OwnerNameshipInline,
     ]
-    exclude = ["flat"]
-
-
-admin.site.register(Owner, OwnerAdmin)
+    exclude = ["flats"]
