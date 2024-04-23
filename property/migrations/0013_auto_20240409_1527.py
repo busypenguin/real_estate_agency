@@ -11,8 +11,6 @@ def save_right_phone_numbers(apps, schema_editor):
         if phonenumbers.is_valid_number(parsed_phone_numbers):
             flat.owner_pure_phone = parsed_phone_numbers
             flat.save()
-        else:
-            return None
 
 
 def move_backward(apps, schema_editor):

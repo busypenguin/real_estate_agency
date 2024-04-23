@@ -9,7 +9,6 @@ def add_flat_in_owner(apps, schema_editor):
     owners = Owner.objects.all()
     for owner in owners:
         flats = Flat.objects.filter(owner_name=owner.name)
-        print(owner, flats)
         owner.flat.set(flats)
 
 

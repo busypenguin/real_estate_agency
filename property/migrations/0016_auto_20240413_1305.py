@@ -8,16 +8,14 @@ def fill_owner(apps, schema_editor):
     Owner = apps.get_model('property', 'Owner')
     for flat in Flat.objects.all():
         Owner.objects.get_or_create(name=flat.owner_name, pure_phone=flat.owner_pure_phone, phonenumber=flat.owners_phonenumber)
-        # flat.save()
-# owner_name, owner_pure_phone, owners_phonenumber, 
 
 
 def move_backward(apps, schema_editor):
     Owner = apps.get_model('property', 'Owner')
     for owner in Owner.objects.all():
-        owner.name = ''
-        owner.pure_phone = ''
-        owner.phonenumber = ''
+        owner.name = None
+        owner.pure_phone = None
+        owner.phonenumber = None
         owner.save()
 
 
