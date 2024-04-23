@@ -6,7 +6,7 @@ import phonenumbers
 
 def save_right_phone_numbers(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
-    for flat in Flat.objects.all():
+    for flat in Flat.objects.iterator():
         parsed_phone_numbers = phonenumbers.parse(flat.owners_phonenumber, 'RU')
         if phonenumbers.is_valid_number(parsed_phone_numbers):
             flat.owner_pure_phone = parsed_phone_numbers
@@ -15,7 +15,7 @@ def save_right_phone_numbers(apps, schema_editor):
 
 def move_backward(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
-    for flat in Flat.objects.all():
+    for flat in Flat.objects.iterator():
         flat.owner_pure_phone = ''
         flat.save()
 

@@ -12,7 +12,7 @@ def fill_owner(apps, schema_editor):
 
 def move_backward(apps, schema_editor):
     Owner = apps.get_model('property', 'Owner')
-    for owner in Owner.objects.all():
+    for owner in Owner.objects.iterator():
         owner.name = None
         owner.pure_phone = None
         owner.phonenumber = None
